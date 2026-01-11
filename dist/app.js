@@ -17,11 +17,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
 app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "..", "uploads")));
 app.use((0, cors_1.default)({
-    origin: [
-        process.env.FRONTEND_URL,
-        process.env.FRONTEND_URL.slice(0, -1),
-        "http://localhost:3000",
-    ],
+    origin: "*",
     optionsSuccessStatus: 200,
     credentials: true,
 }));
@@ -31,19 +27,14 @@ app.use(index_imports_1.responseHandler);
 app.use("/api/v1/user", index_imports_1.userRoutes);
 app.use("/api/v1/post", index_imports_1.postRoutes);
 app.get("/", async (req, res) => {
-    // const response = await db.select({ id: userSchema.id, email: userSchema.email, name: userSchema.fullname, role: userSchema.userType }).from(userSchema);
-    // console.log(response);
     res.status(200).json({
         message: "Welcome to Photogram an Instagram Clone Backend Server!",
-        frontend: process.env.FRONTEND_URL,
         Environment: process.env.NODE_ENV,
-        // response: response
     });
 });
 app.get("/health", async (req, res) => {
     res.status(200).json({
         message: "Server is running!",
-        frontend: process.env.FRONTEND_URL,
         Environment: process.env.NODE_ENV,
     });
 });
@@ -54,7 +45,6 @@ app.listen(process.env.PORT, () => {
     console.log(`
     Date: ${date}
     Environment: ${process.env.NODE_ENV}
-    Frontend: ${process.env.FRONTEND_URL}
     Server running on http://localhost:${process.env.PORT}\n=============================================\n`);
 });
 exports.default = app;
