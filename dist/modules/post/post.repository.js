@@ -19,21 +19,41 @@ exports.postRepository = {
         return await db_1.db.select().from(post_schema_1.postSchema);
     },
     selectAllPostWithCreator: async () => {
+        // const result = await db
+        //     .select({
+        //         post: postSchema,
+        //         creator: userSchema,
+        //         likes: reactionSchema,
+        //         likesCount: sql<number>`COUNT(${reactionSchema.id})`,
+        //         images: sql<string>`GROUP_CONCAT(${mediaSchema.blobUrl} SEPARATOR ',')`,
+        //         bookmarkedUsers: bookmarkSchema,
+        //     })
+        //     .from(postSchema)
+        //     .leftJoin(mediaSchema, eq(postSchema.id, mediaSchema.postId))
+        //     .leftJoin(userSchema, eq(postSchema.creatorId, userSchema.id))
+        //     .leftJoin(reactionSchema, eq(postSchema.id, reactionSchema.postId))
+        //     .leftJoin(bookmarkSchema, eq(postSchema.id, bookmarkSchema.postId))
+        //     .groupBy(postSchema.id, userSchema.id)
+        //     .orderBy(desc(postSchema.createdAt))
         const result = await db_1.db
             .select({
             post: post_schema_1.postSchema,
             creator: user_schema_1.userSchema,
             likes: reaction_schema_1.reactionSchema,
-            likesCount: (0, drizzle_orm_1.sql) `COUNT(${reaction_schema_1.reactionSchema.id})`,
-            images: (0, drizzle_orm_1.sql) `GROUP_CONCAT(${media_schema_1.mediaSchema.blobUrl} SEPARATOR ',')`,
             bookmarkedUsers: bookmark_schema_1.bookmarkSchema,
+            likesCount: (0, drizzle_orm_1.sql) `
+      COUNT(DISTINCT ${reaction_schema_1.reactionSchema.id})
+    `,
+            images: (0, drizzle_orm_1.sql) `
+      GROUP_CONCAT(DISTINCT ${media_schema_1.mediaSchema.blobUrl})
+    `,
         })
             .from(post_schema_1.postSchema)
-            .leftJoin(media_schema_1.mediaSchema, (0, drizzle_orm_1.eq)(post_schema_1.postSchema.id, media_schema_1.mediaSchema.postId))
             .leftJoin(user_schema_1.userSchema, (0, drizzle_orm_1.eq)(post_schema_1.postSchema.creatorId, user_schema_1.userSchema.id))
+            .leftJoin(media_schema_1.mediaSchema, (0, drizzle_orm_1.eq)(post_schema_1.postSchema.id, media_schema_1.mediaSchema.postId))
             .leftJoin(reaction_schema_1.reactionSchema, (0, drizzle_orm_1.eq)(post_schema_1.postSchema.id, reaction_schema_1.reactionSchema.postId))
             .leftJoin(bookmark_schema_1.bookmarkSchema, (0, drizzle_orm_1.eq)(post_schema_1.postSchema.id, bookmark_schema_1.bookmarkSchema.postId))
-            .groupBy(post_schema_1.postSchema.id)
+            .groupBy(post_schema_1.postSchema.id, user_schema_1.userSchema.id, reaction_schema_1.reactionSchema.id, bookmark_schema_1.bookmarkSchema.id)
             .orderBy((0, drizzle_orm_1.desc)(post_schema_1.postSchema.createdAt));
         return result.map((row) => ({
             ...row.post,
