@@ -8,7 +8,6 @@
     "build": "tsc",
     "start": "node --env-file=.env --watch dist/app.js",
     "dev": "tsx --watch --env-file=.env src/app.ts",
-    "prestart": "npm run build",
     "db:generate": "npx drizzle-kit generate",
     "db:migrate": "npx drizzle-kit migrate",
     "db:studio": "npx drizzle-kit studio --port=4983",
