@@ -1,0 +1,1 @@
+{"version":3,"file":"bookmark.controller.d.ts","sourceRoot":"","sources":["../../../../src/modules/post/bookmark/bookmark.controller.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,QAAQ,EAAE,YAAY,EAAE,MAAM,SAAS,CAAC;AAI1D,eAAO,MAAM,kBAAkB;kBACP,OAAO,OAAO,QAAQ,QAAQ,YAAY;0BAOlC,OAAO,OAAO,QAAQ,QAAQ,YAAY;oBAMhD,OAAO,OAAO,QAAQ,QAAQ,YAAY;CAKnE,CAAC"}

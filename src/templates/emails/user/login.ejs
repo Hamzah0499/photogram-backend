@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Login to Photogram</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            color: #262626;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .content h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: #8e8e8e;
+            width: 80px;
+            display: inline-block;
+        }
+
+        .warning {
+            color: #ed4956;
+            font-size: 14px;
+            margin-top: 20px;
+            border-top: 1px solid #dbdbdb;
+            padding-top: 20px;
+        }
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #8e8e8e;
+            border-top: 1px solid #dbdbdb;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #0095f6;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Photogram</h1>
+        </div>
+        <div class="content">
+            <h2>New Login Detected</h2>
+            <p>Hi <%= name %>,</p>
+            <p>We noticed a new login to your Photogram account. If this was you, you can safely ignore this email.</p>
+
+            <div class="info-box">
+                <div class="info-item"><span class="info-label">Time:</span>
+                    <%= time %>
+                </div>
+                <div class="info-item"><span class="info-label">Device:</span> Web Browser</div>
+            </div>
+
+            <p>If this wasn't you, please secure your account immediately by resetting your password.</p>
+            <a href="<%= frontend %>/auth/reset-password" class="btn">Secure Account</a>
+
+            <div class="warning">
+                <strong>Wasn't you?</strong> If you didn't log in, your account may have been compromised. Change your
+                password right away to keep your photos safe.
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 Photogram from Hamzah. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
