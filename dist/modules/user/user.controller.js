@@ -10,15 +10,15 @@ exports.UserController = {
         // Set cookies for access and refresh tokens
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            sameSite: isProduction ? "none" : "lax",
-            secure: isProduction,
-            maxAge: 3600 * 1000, // 1 hour
+            sameSite: "none",
+            secure: true,
+            maxAge: 60 * 60 * 1000,
         });
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            sameSite: isProduction ? "none" : "lax",
-            secure: isProduction,
-            maxAge: 3600 * 1000 * 24 * 7, // 7 days
+            sameSite: "none",
+            secure: true,
+            maxAge: 3600 * 1000 * 24 * 7,
         });
         return res.status(http_status_codes_1.StatusCodes.CREATED).json(newUser);
     },
@@ -26,15 +26,15 @@ exports.UserController = {
         const { user, accessToken, refreshToken } = await user_service_1.userService.loginUser(req.body);
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            sameSite: isProduction ? "none" : "lax",
-            secure: isProduction,
+            sameSite: "none",
+            secure: true,
             maxAge: 3600 * 1000,
         });
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            sameSite: isProduction ? "none" : "lax",
-            secure: isProduction,
-            maxAge: 3600 * 1000 * 24 * 7,
+            sameSite: "none",
+            secure: true,
+            maxAge: 3600 * 1000,
         });
         return res.status(http_status_codes_1.StatusCodes.OK).json(user);
     },

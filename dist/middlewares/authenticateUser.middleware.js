@@ -60,12 +60,11 @@ const authenticateUser = async (req, res, next) => {
                         email: user.email,
                         role: user.role,
                     });
-                    // Set new access token cookie
                     res.cookie("accessToken", newAccessToken, {
                         httpOnly: true,
-                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-                        secure: process.env.NODE_ENV === "production",
-                        maxAge: 3600 * 1000, // 1 hour
+                        sameSite: "none",
+                        secure: true,
+                        maxAge: 60 * 60 * 1000,
                     });
                     req.user = user;
                     console.log("\t:>>> Refresh token present");
