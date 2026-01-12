@@ -12,7 +12,23 @@ import {
 
 const app: Express = express();
 
-app.use(cors());
+/* ================================
+   CORS — AZURE STATIC CONFIG
+================================ */
+
+app.use(
+  cors({
+    origin: "https://ashy-sky-0d028cb1e.6.azurestaticapps.net",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Handle preflight requests
+app.options("*", cors());
+
+/* ================================ */
 
 app.use(morgan("dev"));
 app.use(express.json());
